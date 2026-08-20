@@ -11,6 +11,9 @@ const { notifySalesperson } = require('./notify');
 
 const app = express();
 app.use(express.json());
+app.get('/', (req, res) => {
+  res.send('Inquiry Automation is running successfully!');
+});
 
 app.post('/webhook', async (req, res) => {
   const { name, phone, email, message } = req.body;
