@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="description"
+    content="Inquiry Automation - Capture, manage and respond to customer inquiries automatically."
+  >
+
+  <title>Inquiry Automation | Smart Customer Inquiries</title>
+
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --dark: #0f172a;
+      --dark-2: #1e293b;
+      --text: #334155;
+      --muted: #64748b;
+      --light: #f8fafc;
+      --white: #ffffff;
+      --border: #e2e8f0;
+      --success: #15803d;
+      --error: #dc2626;
+      --shadow: 0 20px 50px rgba(15, 23, 42, 0.10);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+      color: var(--text);
+      background: var(--light);
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    button,
+    input,
+    textarea {
+      font: inherit;
+    }
+
+    /* =========================
+       NAVIGATION
+    ========================= */
+
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      width: min(1120px, 92%);
+      margin: auto;
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 21px;
+      font-weight: 800;
+      color: var(--dark);
+    }
+
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--primary);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-links a {
+      color: var(--text);
+      font-size: 15px;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .nav-button {
+      padding: 10px 17px;
+      border-radius: 8px;
+      background: var(--primary);
+      color: white !important;
+    }
+
+    .nav-button:hover {
+      background: var(--primary-dark);
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      background:
+        radial-gradient(circle at 80% 20%, rgba(37, 99, 235, 0.18), transparent 35%),
+        linear-gradient(135deg, #0f172a, #1e3a8a);
+      color: white;
+      padding: 110px 20px;
+    }
+
+    .hero-container {
+      width: min(1120px, 92%);
+      margin: auto;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 70px;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 7px 13px;
+      border: 1px solid rgba(255,255,255,0.25);
+      border-radius: 50px;
+      background: rgba(255,255,255,0.08);
+      font-size: 13px;
+      margin-bottom: 22px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 6vw, 68px);
+      line-height: 1.05;
+      margin-bottom: 24px;
+      letter-spacing: -2px;
+    }
+
+    .hero h1 span {
+      color: #93c5fd;
+    }
+
+    .hero p {
+      font-size: 19px;
+      color: #dbeafe;
+      max-width: 650px;
+      margin-bottom: 32px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 22px;
+      border-radius: 9px;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      transition: 0.2s;
+    }
+
+    .btn-primary {
+      background: white;
+      color: var(--primary);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-outline {
+      border: 1px solid rgba(255,255,255,0.3);
+      color: white;
+      background: rgba(255,255,255,0.06);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255,255,255,0.12);
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 20px;
+      padding: 28px;
+      backdrop-filter: blur(10px);
+    }
+
+    .hero-card h3 {
+      margin-bottom: 20px;
+      font-size: 20px;
+    }
+
+    .process-item {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .process-number {
+      min-width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #3b82f6;
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+    }
+
+    .process-item strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .process-item p {
+      margin: 0;
+      font-size: 14px;
+      color: #bfdbfe;
+    }
+
+    /* =========================
+       GENERAL SECTIONS
+    ========================= */
+
+    section {
+      scroll-margin-top: 80px;
+    }
+
+    .section {
+      padding: 90px 20px;
+    }
+
+    .section-container {
+      width: min(1120px, 92%);
+      margin: auto;
+    }
+
+    .section-heading {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 55px;
+    }
+
+    .section-heading span {
+      color: var(--primary);
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .section-heading h2 {
+      font-size: 40px;
+      color: var(--dark);
+      margin: 10px 0 15px;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    /* =========================
+       FEATURES
+    ========================= */
+
+    .features {
+      background: white;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .feature-card {
+      padding: 30px;
+      border: 1px solid var(--border);
+      border-radius: 15px;
+      background: white;
+      transition: 0.25s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: #eff6ff;
+      color: var(--primary);
+      font-size: 22px;
+      margin-bottom: 18px;
+    }
+
+    .feature-card h3 {
+      color: var(--dark);
+      margin-bottom: 10px;
+      font-size: 19px;
+    }
+
+    .feature-card p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    /* =========================
+       HOW IT WORKS
+    ========================= */
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 25px;
+    }
+
+    .step {
+      text-align: center;
+      padding: 30px;
+    }
+
+    .step-circle {
+      width: 60px;
+      height: 60px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      background: var(--primary);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 21px;
+      font-weight: 800;
+    }
+
+    .step h3 {
+      color: var(--dark);
+      margin-bottom: 8px;
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    /* =========================
+       CONTACT
+    ========================= */
+
+    .contact-section {
+      background: #eef4ff;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 50px;
+      align-items: start;
+    }
+
+    .contact-info h2 {
+      color: var(--dark);
+      font-size: 38px;
+      margin-bottom: 15px;
+    }
+
+    .contact-info > p {
+      color: var(--muted);
+      margin-bottom: 30px;
+    }
+
+    .contact-point {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 22px;
+    }
+
+    .contact-point-icon {
+      width: 42px;
+      height: 42px;
+      flex-shrink: 0;
+      border-radius: 10px;
+      background: white;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.06);
+    }
+
+    .contact-point strong {
+      color: var(--dark);
+      display: block;
+    }
+
+    .contact-point span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .form-card {
+      background: white;
+      border-radius: 18px;
+      padding: 35px;
+      box-shadow: var(--shadow);
+    }
+
+    .form-card h3 {
+      color: var(--dark);
+      font-size: 24px;
+      margin-bottom: 6px;
+    }
+
+    .form-card > p {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 25px;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--dark);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 9px;
+      padding: 13px 14px;
+      outline: none;
+      color: var(--dark);
+      background: white;
+      transition: 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+    }
+
+    .form-group textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .required {
+      color: var(--error);
+    }
+
+    .submit-btn {
+      width: 100%;
+      background: var(--primary);
+      color: white;
+    }
+
+    .submit-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    #status {
+      margin-top: 18px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 700;
+      min-height: 22px;
+    }
+
+    #status.success {
+      color: var(--success);
+    }
+
+    #status.error {
+      color: var(--error);
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      background: var(--dark);
+      color: #cbd5e1;
+      padding: 45px 20px 25px;
+    }
+
+    .footer-container {
+      width: min(1120px, 92%);
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 30px;
+      padding-bottom: 30px;
+      border-bottom: 1px solid #334155;
+    }
+
+    .footer-brand h3 {
+      color: white;
+      margin-bottom: 8px;
+    }
+
+    .footer-brand p {
+      max-width: 450px;
+      font-size: 14px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+    }
+
+    .footer-links a {
+      font-size: 14px;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .copyright {
+      width: min(1120px, 92%);
+      margin: 20px auto 0;
+      text-align: center;
+      font-size: 13px;
+      color: #94a3b8;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 850px) {
+
+      .hero-container,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        padding: 80px 20px;
+      }
+
+      .hero-card {
+        max-width: 600px;
+        margin: auto;
+      }
+
+      .feature-grid,
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links a:not(.nav-button) {
+        display: none;
+      }
+
+      .section {
+        padding: 70px 20px;
+      }
+
+      .footer-container {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 550px) {
+
+      .hero h1 {
+        font-size: 42px;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .form-card {
+        padding: 25px;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+      }
+
+      .hero-buttons .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       NAVIGATION
+  ========================== -->
+
+  <header class="navbar">
+
+    <div class="nav-container">
+
+      <a href="#home" class="logo">
+        <span class="logo-icon">IA</span>
+        Inquiry Automation
+      </a>
+
+      <nav class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#contact" class="nav-button">Send Inquiry</a>
+      </nav>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================
+       HERO
+  ========================== -->
+
+  <section class="hero" id="home">
+
+    <div class="hero-container">
+
+      <div>
+
+        <span class="hero-badge">
+          Smart Customer Inquiry Management
+        </span>
+
+        <h1>
+          Turn Customer Questions Into
+          <span>Opportunities.</span>
+        </h1>
+
+        <p>
+          Capture customer inquiries, keep them organized,
+          and make sure important messages reach your team
+          without getting lost.
+        </p>
+
+        <div class="hero-buttons">
+
+          <a href="#contact" class="btn btn-primary">
+            Send an Inquiry
+          </a>
+
+          <a href="#how-it-works" class="btn btn-outline">
+            See How It Works
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <div class="hero-card">
+
+        <h3>How your inquiry is handled</h3>
+
+        <div class="process-item">
+
+          <div class="process-number">1</div>
+
+          <div>
+            <strong>Customer contacts you</strong>
+            <p>
+              A customer submits their name,
+              contact details and message.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="process-item">
+
+          <div class="process-number">2</div>
+
+          <div>
+            <strong>Inquiry is captured</strong>
+            <p>
+              Your system securely processes
+              the submitted information.
+            </p>
+          </div>
+
+        </div>
+
+
+        <div class="process-item">
+
+          <div class="process-number">3</div>
+
+          <div>
+            <strong>Your team is notified</strong>
+            <p>
+              The inquiry is passed to your
+              notification system for follow-up.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       FEATURES
+  ========================== -->
+
+  <section class="section features" id="features">
+
+    <div class="section-container">
+
+      <div class="section-heading">
+
+        <span>Features</span>
+
+        <h2>
+          Everything You Need to Capture Inquiries
+        </h2>
+
+        <p>
+          A simple system designed to help businesses
+          collect customer inquiries and respond efficiently.
+        </p>
+
+      </div>
+
+
+      <div class="feature-grid">
+
+        <div class="feature-card">
+
+          <div class="feature-icon">✉</div>
+
+          <h3>Inquiry Collection</h3>
+
+          <p>
+            Give customers an easy way to contact
+            your business from any device.
+          </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+          <div class="feature-icon">⚡</div>
+
+          <h3>Fast Processing</h3>
+
+          <p>
+            Customer messages are sent directly
+            to your backend for processing.
+          </p>
+
+        </div>
+
+
+        <div class="feature-card">
+
+          <div class="feature-icon">🔔</div>
+
+          <h3>Team Notifications</h3>
+
+          <p>
+            Your existing notification system can
+            alert the salesperson when an inquiry arrives.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       HOW IT WORKS
+  ========================== -->
+
+  <section class="section" id="how-it-works">
+
+    <div class="section-container">
+
+      <div class="section-heading">
+
+        <span>How It Works</span>
+
+        <h2>
+          Simple From Start to Finish
+        </h2>
+
+        <p>
+          Customers submit their questions while
+          your system handles the processing behind the scenes.
+        </p>
+
+      </div>
+
+
+      <div class="steps">
+
+        <div class="step">
+
+          <div class="step-circle">1</div>
+
+          <h3>Customer Submits</h3>
+
+          <p>
+            The customer fills out the inquiry form
+            with their contact information and message.
+          </p>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="step-circle">2</div>
+
+          <h3>System Processes</h3>
+
+          <p>
+            Your server receives and stores the inquiry
+            through the existing webhook.
+          </p>
+
+        </div>
+
+
+        <div class="step">
+
+          <div class="step-circle">3</div>
+
+          <h3>Team Gets Notified</h3>
+
+          <p>
+            Your existing notification system sends
+            the inquiry to the appropriate salesperson.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       CONTACT FORM
+  ========================== -->
+
+  <section class="section contact-section" id="contact">
+
+    <div class="section-container">
+
+      <div class="contact-grid">
+
+        <div class="contact-info">
+
+          <h2>
+            Let's Talk
+          </h2>
+
+          <p>
+            Have a question, need more information,
+            or want to discuss your requirements?
+            Send us a message.
+          </p>
+
+
+          <div class="contact-point">
+
+            <div class="contact-point-icon">
+              ✉
+            </div>
+
+            <div>
+              <strong>Email</strong>
+              <span>We'll respond to your inquiry.</span>
+            </div>
+
+          </div>
+
+
+          <div class="contact-point">
+
+            <div class="contact-point-icon">
+              ⚡
+            </div>
+
+            <div>
+              <strong>Fast Inquiry Processing</strong>
+              <span>
+                Your message is sent directly to our system.
+              </span>
+            </div>
+
+          </div>
+
+
+          <div class="contact-point">
+
+            <div class="contact-point-icon">
+              🔒
+            </div>
+
+            <div>
+              <strong>Your Information</strong>
+              <span>
+                Please provide accurate contact information
+                so our team can reach you.
+              </span>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-card">
+
+          <h3>Send an Inquiry</h3>
+
+          <p>
+            Fields marked with * are required.
+          </p>
+
+
+          <form id="inquiryForm">
+
+            <div class="form-row">
+
+              <div class="form-group">
+
+                <label for="name">
+                  Name <span class="required">*</span>
+                </label>
+
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Your full name"
+                  required
+                >
+
+              </div>
+
+
+              <div class="form-group">
+
+                <label for="phone">
+                  Phone
+                </label>
+
+                <input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  placeholder="Your phone number"
+                >
+
+              </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="email">
+                Email
+              </label>
+
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="you@example.com"
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="message">
+                Message <span class="required">*</span>
+              </label>
+
+              <textarea
+                id="message"
+                name="message"
+                placeholder="How can we help you?"
+                required
+              ></textarea>
+
+            </div>
+
+
+            <button
+              type="submit"
+              class="btn submit-btn"
+              id="submitButton"
+            >
+              Send Inquiry
+            </button>
+
+
+            <div id="status"></div>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+
+  <footer>
+
+    <div class="footer-container">
+
+      <div class="footer-brand">
+
+        <h3>Inquiry Automation</h3>
+
+        <p>
+          A simple way to capture customer inquiries
+          and connect them with your team.
+        </p>
+
+      </div>
+
+
+      <div class="footer-links">
+
+        <a href="#home">Home</a>
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#contact">Contact</a>
+
+      </div>
+
+    </div>
+
+
+    <div class="copyright">
+      © 2026 Inquiry Automation. All rights reserved.
+    </div>
+
+  </footer>
+
+
+  <!-- =========================
+       FORM JAVASCRIPT
+  ========================== -->
+
+  <script>
+
+    const form = document.getElementById("inquiryForm");
+    const status = document.getElementById("status");
+    const submitButton = document.getElementById("submitButton");
+
+
+    form.addEventListener("submit", async function(event) {
+
+      event.preventDefault();
+
+
+      status.textContent = "Sending your inquiry...";
+      status.className = "";
+
+      submitButton.disabled = true;
+      submitButton.textContent = "Sending...";
+
+
+      const data = {
+
+        name: document.getElementById("name").value.trim(),
+
+        phone: document.getElementById("phone").value.trim(),
+
+        email: document.getElementById("email").value.trim(),
+
+        message: document.getElementById("message").value.trim()
+
+      };
+
+
+      try {
+
+        const response = await fetch("/webhook", {
+
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json"
+          },
+
+          body: JSON.stringify(data)
+
+        });
+
+
+        const result = await response.json();
+
+
+        if (response.ok) {
+
+          status.textContent =
+            "✓ Your inquiry has been sent successfully. Thank you!";
+
+          status.className = "success";
+
+          form.reset();
+
+        } else {
+
+          status.textContent =
+            result.error ||
+            "We could not process your inquiry. Please try again.";
+
+          status.className = "error";
+
+        }
+
+
+      } catch (error) {
+
+        console.error("Submission error:", error);
+
+        status.textContent =
+          "Unable to connect to the server. Please try again later.";
+
+        status.className = "error";
+
+      }
+
+
+      submitButton.disabled = false;
+      submitButton.textContent = "Send Inquiry";
+
+    });
+
+  </script>
+
+</body>
+</html>
