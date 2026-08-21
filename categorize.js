@@ -20,7 +20,7 @@ async function categorizeInquiry(message) {
         role: 'user',
         content: `Classify this daycare inquiry into exactly one of these categories: ${CATEGORIES.join(', ')}.
 
-Also write a one-sentence summary a busy salesperson can scan in two seconds.
+Also write a one-sentence summary that a busy salesperson can scan in two seconds.
 
 Inquiry: "${message}"
 
