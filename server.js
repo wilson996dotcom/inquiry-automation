@@ -5,6 +5,7 @@ const path = require('path');
 
 const { insertInquiry } = require('./db');
 const { notifySalesperson } = require('./notify');
+const { categorizeInquiry } = require('./ai');
 
 const app = express();
 
@@ -32,14 +33,10 @@ app.post('/webhook', async (req, res) => {
       message
     });
 
-    // Placeholder until AI categorization is enabled
-    const placeholder = {
-      category: 'uncategorized',
-      summary: message
-    };
+    const aiResult = await categorizeInquiry(message);
 
     // Notify salesperson
-    await notifySalesperson(inquiry, placeholder);
+    await notifySalesperson(inquiry, aiResult);
 
     res.status(200).json({
       success: true,
