@@ -1,4 +1,5 @@
 const Anthropic = require('@anthropic-ai/sdk');
+const { categorizeInquiry } = require('./categorize');
 
 const anthropic = new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY });
 
